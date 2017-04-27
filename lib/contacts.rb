@@ -23,6 +23,11 @@ class Address
     @@addresses = []
   end
 
+  def address_formatted
+    @street + ", " + @city + ", " + @state + ", " +  @zipcode
+
+  end
+
   def self.find (id)
     found_address = nil
     @@addresses.each() do |address|
@@ -57,6 +62,10 @@ class Phone
     @@phones = []
   end
 
+  def phone_formatted
+    @area_code + "-" + @number
+  end
+
   def self.find (id)
     found_phone = nil
     @@phones.each() do |phone|
@@ -80,9 +89,6 @@ class Email
     @email_formatted
   end
 
-  def email_formatted
-     @email_address.concat('-') + @type
-  end
   def save
     @@emails.push(self)
   end
@@ -142,6 +148,11 @@ class Contact
 
   def add_email(email)
     @email.push(email)
+  end
+
+  def name_formatted
+    @first_name + " " + @last_name
+
   end
 
   def self.find (id)

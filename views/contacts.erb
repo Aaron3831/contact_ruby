@@ -3,6 +3,6 @@
 <h3>Here are your Contacts:</h3>
 <ul>
   <% @contacts.each() do |contact| %>
-    <li><a href="/contacts/<%= contact.id() %>"><%= contact.first_name().concat(" ").concat(contact.last_name()) %></li>
+    <li><a href="/contacts/<%= contact.id() %>"><%= contact.name_formatted() %></li>
   <% end %>
 </ul>

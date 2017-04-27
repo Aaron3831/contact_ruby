@@ -1,23 +1,29 @@
 <div class="row">
   <div class="jumbotron">
-    <h4>Name: <i><%= @contact.first_name() %></i></h4>
+    <h4>Name: <i><%= @contact.name_formatted() %></i></h4>
     <h4>Job Title: <i><%= @contact.job_title() %></i></h4>
     <h4>Company: <i><%= @contact.company() %></i></h4>
-    <h3>Address</h3>
-    <% @contact.address().each() do |address| %>
-      <h4><%= address.type() %>: <i><%= address.street() %></i></h4>
-      <h4><i><%= address.city().concat(",").concat(address.state()).concat("-").concat(address.zipcode()) %></i></h4>
-    <% end %>
 
-    <h3>Phone Number</h3>
-    <% @contact.phone().each() do |phone| %>
-      <h4><%= phone.type() %> : <i><%= phone.area_code().concat("-").concat(phone.number()) %></i></h4>
-    <% end %>
-
-    <h3>Email</h3>
-    <% @contact.email().each() do |email| %>
-      <h4>Email Address: <i><%= email.email_formatted() %></i></h4>
+    <% if @contact.address().length() > 1  %>
+      <h3>Address</h3>
+      <% @contact.address().each() do |address| %>
+        <h4><%= address.type() %> : <i><%= address.address_formatted()%></i></h4>
       <% end %>
+    <% end %>
 
+    <% if @contact.phone().length() > 1  %>
+      <h3>Phone Number</h3>
+      <% @contact.phone().each() do |phone| %>
+        <h4><%= phone.type() %> : <i><%= phone.phone_formatted() %></i></h4>
+      <% end %>
+    <% end %>
+
+    <% if @contact.email().length() > 1  %>
+      <h3>Email</h3>
+      <% @contact.email().each() do |email| %>
+        <h4><%= email.type() %> : <i><%= email.email_address() %></i></h4>
+      <% end %>
+    <% end %>
+    
    </div>
 </div>
