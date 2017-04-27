@@ -1,6 +1,76 @@
 require('rspec')
 require('contacts')
 
+describe('Address') do
+  before() do
+   Address.clear()
+  end
+  describe("#attr_accessor") do
+    it("will return address information") do
+      test_address = Address.new({:street=> "424th St.", :city=> "Enumclaw", :state=> "WA", :zipcode=> "98022", :type=> "Home"})
+      expect(test_address.street()).to eq("424th St.")
+      expect(test_address.city()).to eq("Enumclaw")
+      expect(test_address.state()).to eq("WA")
+      expect(test_address.zipcode()).to eq("98022")
+      expect(test_address.type()).to eq("Home")
+      expect(test_address.id()).to eq(1)
+    end
+  end
+
+  describe(".find") do
+    it("returns a contact by it's id number") do
+      test_address = Address.new({:street=> "424th St.", :city=> "Enumclaw", :state=> "WA", :zipcode=> "98022", :type=> "Home"})
+      test_address.save()
+      expect(Address.find(test_address.id())).to eq(test_address)
+    end
+  end
+end
+
+describe('Phone') do
+  before() do
+   Phone.clear()
+  end
+  describe("#attr_accessor") do
+    it("will return phone information") do
+      test_phone = Phone.new({:area_code=> 360, :number=> 8253831, :type=> "Home"})
+      expect(test_phone.area_code()).to eq(360)
+      expect(test_phone.number()).to eq(8253831)
+      expect(test_phone.type()).to eq("Home")
+      expect(test_phone.id()).to eq(1)
+    end
+  end
+
+  describe(".find") do
+    it("returns a contact by it's id number") do
+      test_phone = Phone.new({:area_code=> 360, :number=> 8253831, :type=> "Home"})
+      test_phone.save()
+      expect(Phone.find(test_phone.id())).to eq(test_phone)
+    end
+  end
+end
+
+describe('Email') do
+  before() do
+   Email.clear()
+  end
+  describe("#attr_accessor") do
+    it("will return email information") do
+      test_email = Email.new({:email_address=> "aaron3831@gmail.com", :type=> "Personal"})
+      expect(test_email.email_address()).to eq("aaron3831@gmail.com")
+      expect(test_email.type()).to eq("Personal")
+      expect(test_email.id()).to eq(1)
+    end
+  end
+
+  describe(".find") do
+    it("returns an email by it's id number") do
+      test_email = Email.new({:email_address=> "aaron3831@gmail.com", :type=> "Personal"})
+      test_email.save()
+      expect(Email.find(test_email.id())).to eq(test_email)
+    end
+  end
+end
+
 describe('Contact') do
   before() do
    Contact.clear()
@@ -50,18 +120,25 @@ describe('Contact') do
       expect(Contact.find(test_contact.id())).to eq(test_contact)
     end
   end
-end
 
-describe('Address') do
-  describe("#attr_accessor") do
-    it("will return address information") do
+  describe("#add_address") do
+    it("returns a contact with address array") do
+      test_contact = Contact.new({:first_name=> "Bob", :last_name=> "Smith", :job_title=> "Manager", :company=> "Epicodus"})
       test_address = Address.new({:street=> "424th St.", :city=> "Enumclaw", :state=> "WA", :zipcode=> "98022", :type=> "Home"})
-      expect(test_address.street()).to eq("424th St.")
-      expect(test_address.city()).to eq("Enumclaw")
-      expect(test_address.state()).to eq("WA")
-      expect(test_address.zipcode()).to eq("98022")
-      expect(test_address.type()).to eq("Home")
-      expect(test_address.id()).to eq(1)
+      test_address.save()
+      test_contact.add_address(test_address)
+      test_contact.save()
+      expect(Contact.all()).to eq([test_contact])
+    end
+  end
+
+  describe("#add_phone") do
+    it("returns a contact with phone array") do
+      test_contact = Contact.new({:first_name=> "Bob", :last_name=> "Smith", :job_title=> "Manager", :company=> "Epicodus"})
+      test_phone = Phone.new({:area_code=> 360, :number=> 8253831, :type=> "Home"})
+      test_contact.add_phone(test_phone)
+      test_contact.save()
+      expect(Contact.all()).to eq([test_contact])
     end
   end
 end
