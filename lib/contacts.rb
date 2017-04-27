@@ -1,5 +1,5 @@
 class Address
-  attr_reader(:street, :city, :state, :zipcode, :type, :id)
+  attr_reader(:street, :city, :state, :zipcode, :type)
 
   def initialize(attributes)
     @street = attributes[:street]
@@ -12,13 +12,12 @@ class Address
 
   def address_formatted
     @street + ", " + @city + ", " + @state + ", " +  @zipcode
-
   end
 
 end
 
 class Phone
-  attr_reader(:area_code, :number, :type, :id)
+  attr_reader(:area_code, :number, :type)
 
   def initialize(attributes)
     @area_code = attributes[:area_code]
@@ -32,34 +31,12 @@ class Phone
 end
 
 class Email
-  attr_reader(:email_address, :type, :id)
+  attr_reader(:email_address, :type)
 
   def initialize(attributes)
     @email_address = attributes[:email_address]
     @type = attributes[:type]
     @email_formatted
-  end
-
-  def save
-    @@emails.push(self)
-  end
-
-  def self.all
-    @@emails
-  end
-
-  def self.clear
-    @@emails = []
-  end
-
-  def self.find (id)
-    found_email = nil
-    @@emails.each() do |email|
-      if email.id() == id.to_i
-        found_email = email
-      end
-    end
-    found_email
   end
 end
 
@@ -103,7 +80,6 @@ class Contact
 
   def name_formatted
     @first_name + " " + @last_name
-
   end
 
   def self.find (id)

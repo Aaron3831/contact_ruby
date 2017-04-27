@@ -91,6 +91,5 @@ post('/contacts/:id') do
     email = Email.new({:email_address=> email, :type=> email_type})
     @contact.add_email(email)
   end
-
   erb(:contact)
 end
