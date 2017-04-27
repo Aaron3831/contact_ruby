@@ -4,26 +4,73 @@
     <h4>Job Title: <i><%= @contact.job_title() %></i></h4>
     <h4>Company: <i><%= @contact.company() %></i></h4>
 
-    <% if @contact.address().length() > 1  %>
+    <% if @contact.address().length() > 0  %>
+
       <h3>Address</h3>
       <% @contact.address().each() do |address| %>
         <h4><%= address.type() %> : <i><%= address.address_formatted()%></i></h4>
       <% end %>
     <% end %>
 
-    <% if @contact.phone().length() > 1  %>
+    <% if @contact.phone().length() > 0  %>
       <h3>Phone Number</h3>
       <% @contact.phone().each() do |phone| %>
         <h4><%= phone.type() %> : <i><%= phone.phone_formatted() %></i></h4>
       <% end %>
     <% end %>
 
-    <% if @contact.email().length() > 1  %>
+    <% if @contact.email().length() > 0  %>
       <h3>Email</h3>
       <% @contact.email().each() do |email| %>
         <h4><%= email.type() %> : <i><%= email.email_address() %></i></h4>
       <% end %>
     <% end %>
-    
    </div>
 </div>
+<form action="/contacts/<%= @contact.id() %>" method="post">
+  <div class="form-group">
+    <label for="street">Street:</label>
+    <input id="street" name="street" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input id="city" name="city" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="state">State:</label>
+    <input id="state" name="state" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="zipcode">Zipcode:</label>
+    <input id="zipcode" name="zipcode" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="address-type">Type:</label>
+    <input id="address-type" name="address-type" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn bg-primary">Add Address</button>
+
+  <div class="form-group">
+    <label for="area-code">Area Code:</label>
+    <input id="area-code" name="area-code" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="number">Number:</label>
+    <input id="number" name="number" type="number" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="phone-type">Type:</label>
+    <input id="phone-type" name="phone-type" type="text" class="form-control">
+  </div>
+    <button type="submit" class="btn bg-primary">Add Phone Number</button>
+
+  <div class="form-group">
+    <label for="address-email">Email Address:</label>
+    <input id="address-email" name="address-email" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="email-type">Type:</label>
+    <input id="email-type" name="email-type" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn bg-primary">Add Email</button>
+</form>

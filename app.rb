@@ -31,24 +31,27 @@ post('/contacts') do
   zipcode = params.fetch("zipcode")
   address_type = params.fetch("address-type")
 
-  address = Address.new({:street=> street, :city=> city, :state=> state, :zipcode=> zipcode, :type=> address_type})
-
-  contact.add_address(address)
+  if street !="""" && city !="""" && state != """" && zipcode != """" && address_type != """"
+    address = Address.new({:street=> street, :city=> city, :state=> state, :zipcode=> zipcode, :type=> address_type})
+    contact.add_address(address)
+  end
 
   area_code = params.fetch("area-code")
   number = params.fetch("number")
   phone_type = params.fetch("phone-type")
 
-  phone = Phone.new({:area_code=> area_code, :number=> number, :type=> phone_type})
-
-  contact.add_phone(phone)
+  if area_code !="""" && number !="""" && phone_type != """"
+    phone = Phone.new({:area_code=> area_code, :number=> number, :type=> phone_type})
+    contact.add_phone(phone)
+  end
 
   email = params.fetch("address-email")
   email_type = params.fetch("email-type")
 
-  email = Email.new({:email_address=> email, :type=> email_type})
-
-  contact.add_email(email)
+  if email !="""" && email_type !=""""
+    email = Email.new({:email_address=> email, :type=> email_type})
+    contact.add_email(email)
+  end
 
   contact.save()
   erb(:contacts)
@@ -56,5 +59,38 @@ end
 
 get('/contacts/:id') do
   @contact = Contact.find(params.fetch("id"))
+  erb(:contact)
+end
+
+post('/contacts/:id') do
+  @contact = Contact.find(params.fetch("id"))
+  street = params.fetch("street")
+  city = params.fetch("city")
+  state = params.fetch("state")
+  zipcode = params.fetch("zipcode")
+  address_type = params.fetch("address-type")
+
+  if street !="""" && city !="""" && state != """" && zipcode != """" && address_type != """"
+    address = Address.new({:street=> street, :city=> city, :state=> state, :zipcode=> zipcode, :type=> address_type})
+    @contact.add_address(address)
+  end
+
+  area_code = params.fetch("area-code")
+  number = params.fetch("number")
+  phone_type = params.fetch("phone-type")
+
+  if area_code !="""" && number !="""" && phone_type != """"
+    phone = Phone.new({:area_code=> area_code, :number=> number, :type=> phone_type})
+    @contact.add_phone(phone)
+  end
+
+  email = params.fetch("address-email")
+  email_type = params.fetch("email-type")
+
+  if email !="""" && email_type !=""""
+    email = Email.new({:email_address=> email, :type=> email_type})
+    @contact.add_email(email)
+  end
+
   erb(:contact)
 end
