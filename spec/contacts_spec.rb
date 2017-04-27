@@ -141,4 +141,5 @@ describe('Contact') do
       expect(Contact.all()).to eq([test_contact])
     end
   end
+
 end

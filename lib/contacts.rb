@@ -1,5 +1,5 @@
 class Address
-  attr_accessor(:street, :city, :state, :zipcode, :type, :id)
+  attr_reader(:street, :city, :state, :zipcode, :type, :id)
 
   @@addresses = []
 
@@ -35,7 +35,7 @@ class Address
 end
 
 class Phone
-  attr_accessor(:area_code, :number, :type, :id)
+  attr_reader(:area_code, :number, :type, :id)
 
   @@phones = []
 
@@ -69,7 +69,7 @@ class Phone
 end
 
 class Email
-  attr_accessor(:email_address, :type, :id)
+  attr_reader(:email_address, :type, :id)
 
   @@emails = []
 
@@ -77,6 +77,11 @@ class Email
     @email_address = attributes[:email_address]
     @type = attributes[:type]
     @id = @@emails.length() + 1
+    @email_formatted
+  end
+
+  def email_formatted
+     @email_address.concat('-') + @type
   end
   def save
     @@emails.push(self)
@@ -102,7 +107,7 @@ class Email
 end
 
 class Contact
-  attr_accessor(:first_name, :last_name, :job_title, :company, :address, :phone, :email, :id)
+  attr_reader(:first_name, :last_name, :job_title, :company, :address, :phone, :email, :id)
   @@contacts = []
   def initialize(attributes)
     @first_name = attributes[:first_name]
